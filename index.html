@@ -1,0 +1,57 @@
+<template>
+    <div>
+      <h1>Calculadora Aritmética</h1>
+      <div>
+        <input type="number" v-model.number="num1" @input="calculate" />
+        <select v-model="operation" @change="calculate">
+          <option value="add">+</option>
+          <option value="subtract">-</option>
+          <option value="multiply">*</option>
+          <option value="divide">/</option>
+        </select>
+        <input type="number" v-model.number="num2" @input="calculate" />
+      </div>
+      <h2>Resultado: {{ result }}</h2>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        num1: 0,
+        num2: 0,
+        operation: 'add',
+        result: 0
+      };
+    },
+    methods: {
+      calculate() {
+        switch (this.operation) {
+          case 'add':
+            this.result = this.num1 + this.num2;
+            break;
+          case 'subtract':
+            this.result = this.num1 - this.num2;
+            break;
+          case 'multiply':
+            this.result = this.num1 * this.num2;
+            break;
+          case 'divide':
+            this.result = this.num2 !== 0 ? this.num1 / this.num2 : 'Erro: Divisão por zero';
+            break;
+        }
+      }
+    },
+    watch: {
+      num1: 'calculate',
+      num2: 'calculate',
+      operation: 'calculate'
+    }
+  };
+  </script>
+  
+  <style scoped>
+  /* Adicione seu CSS aqui */
+  </style>
+  
